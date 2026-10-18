@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jeremy Roger L. Maguigad | Video Editor & AI Content Creator</title>
+  <!-- Google Fonts matching your exact Framer design -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- TOP NAVIGATION -->
+  <header class="navbar">
+    <a href="#" class="logo">JRM.</a>
+    <nav class="nav-links">
+      <a href="#showreel">Showreel</a>
+      <a href="#archive">Portfolio</a>
+      <a href="#categories">Categories</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <!-- 1. HERO SECTION (Framer Split Layout) -->
+    <section class="hero" id="about">
+      <div class="hero-left">
+        <p class="script-intro">Hello, I'm</p>
+        <h1 class="hero-title">JEREMY ROGER<br>L. MAGUIGAD</h1>
+        <p class="hero-subtitle">FREELANCE VIDEO EDITOR & AI CONTENT CREATOR</p>
+        <p class="hero-bio">
+          I turn raw footage into stories that connect. Sharp edits, clear storytelling, and next-gen AI production workflows.
+        </p>
+        <div class="hero-actions">
+          <a href="#archive" class="btn-pill btn-white">View My Work</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="portrait-placeholder">
+          <svg viewBox="0 0 200 220" class="portrait-svg">
+            <ellipse cx="100" cy="60" rx="36" ry="44" fill="none" stroke="#ffffff" stroke-width="1.2"/>
+            <path d="M 20 210 C 20 135, 180 135, 180 210 Z" fill="none" stroke="#ffffff" stroke-width="1.2"/>
+          </svg>
+          <span class="placeholder-label">PORTRAIT / IMAGE PLACEHOLDER</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. 16:9 TABLET SHOWREEL SECTION -->
+    <section class="showreel-section" id="showreel">
+      <div class="showreel-left">
+        <div class="status-pill">
+          <span class="dot"></span> VIDEO EDITOR FOR HIGH-PERFORMING CONTENT
+        </div>
+        <h2 class="showreel-heading">
+          HIGH-IMPACT EDITS THAT <span class="text-outline">STOP THE SCROLL</span> & DRIVE RESULTS
+        </h2>
+        <p class="showreel-desc">
+          Helping brands and creators turn ideas into high-performing content across Premiere Pro, CapCut, HeyGen, Runway, and ElevenLabs.
+        </p>
+
+        <div class="feature-tags">
+          <span class="tag-pill">&#10003; 100+ Videos Edited</span>
+          <span class="tag-pill">&#10003; AI-Enhanced Workflows</span>
+          <span class="tag-pill">&#10003; High-Retention Pacing</span>
+        </div>
+
+        <div class="showreel-cta">
+          <a href="#archive" class="btn-pill btn-white">Explore Archive</a>
+          <a href="#contact" class="btn-pill btn-outline">Hire Me &rarr;</a>
+        </div>
+      </div>
+
+      <div class="showreel-right">
+        <!-- Floating Badge Top Right -->
+        <div class="floating-badge badge-top">
+          <span class="badge-num">+45%</span>
+          <span class="badge-text">Avg. Retention</span>
+        </div>
+
+        <!-- 16:9 Landscape Tablet Mockup -->
+        <div class="tablet-frame">
+          <div class="tablet-camera"></div>
+          <div class="tablet-screen">
+            <div class="video-placeholder-inner">
+              <button class="play-btn" aria-label="Play Showreel">&#9654;</button>
+              <span class="mono-label">16:9 MAIN SHOWREEL PLACEHOLDER</span>
+              <span class="mono-sub">DROP YOUTUBE / VIMEO / MP4 EMBED HERE</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating Badge Bottom Left -->
+        <div class="floating-badge badge-bottom">
+          <span class="badge-num">1.2M+</span>
+          <span class="badge-text">Total Views</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. SELECTED WORK ARCHIVE GRID -->
+    <section class="archive-section" id="archive">
+      <div class="archive-header">
+        <p class="archive-meta">&bull; THE ARCHIVE &middot; <span id="header-file-count">12</span> FILES &bull;</p>
+        <h2 class="archive-title">FEATURED <span class="mono-accent">PROJECT</span></h2>
+      </div>
+
+      <!-- Dynamic Grid populated by script.js -->
+      <div class="archive-grid" id="archive-grid"></div>
+    </section>
+
+    <!-- 4. INTERACTIVE SELECT CATEGORY DASHBOARD -->
+    <section class="category-dashboard" id="categories">
+      <div class="dashboard-topbar">
+        <div class="topbar-left">
+          <span class="p1-badge">P1</span>
+          <span class="dashboard-title">SELECT CATEGORY</span>
+          <span class="dashboard-count" id="topbar-count">12 FILES</span>
+        </div>
+        <div class="topbar-right">
+          <button class="icon-btn" id="prev-cat" title="Previous Category">&lt;</button>
+          <button class="icon-btn" id="reset-cat" title="Reset to All">||</button>
+          <button class="icon-btn" id="next-cat" title="Next Category">&gt;</button>
+          <button class="view-all-btn" data-filter="ALL">&#8862; VIEW ALL FILES</button>
+        </div>
+      </div>
+
+      <div class="dashboard-body">
+        <!-- 6 Category Cards -->
+        <div class="category-cards" id="category-cards">
+          <button class="cat-card active" data-category="ALL">
+            <div class="cat-card-top">
+              <span>01</span>
+              <span>&times;12</span>
+            </div>
+            <div class="cat-icon">&#8862;</div>
+            <div class="cat-name">ALL</div>
+          </button>
+
+          <button class="cat-card" data-category="E-COMMERCE">
+            <div class="cat-card-top">
+              <span>02</span>
+              <span>&times;3</span>
+            </div>
+            <div class="cat-icon">&#128717;</div>
+            <div class="cat-name">E-COMMERCE</div>
+          </button>
+
+          <button class="cat-card" data-category="SHORT FORM">
+            <div class="cat-card-top">
+              <span>03</span>
+              <span>&times;3</span>
+            </div>
+            <div class="cat-icon">&#128241;</div>
+            <div class="cat-name">SHORT FORM</div>
+          </button>
+
+          <button class="cat-card" data-category="AI PRODUCTION">
+            <div class="cat-card-top">
+              <span>04</span>
+              <span>&times;3</span>
+            </div>
+            <div class="cat-icon">&#10024;</div>
+            <div class="cat-name">AI PRODUCTION</div>
+          </button>
+
+          <button class="cat-card" data-category="COMMERCIALS">
+            <div class="cat-card-top">
+              <span>05</span>
+              <span>&times;2</span>
+            </div>
+            <div class="cat-icon">&#127916;</div>
+            <div class="cat-name">COMMERCIALS</div>
+          </button>
+
+          <button class="cat-card" data-category="THUMBNAILS">
+            <div class="cat-card-top">
+              <span>06</span>
+              <span>&times;1</span>
+            </div>
+            <div class="cat-icon">&#128444;</div>
+            <div class="cat-name">THUMBNAILS</div>
+          </button>
+        </div>
+
+        <!-- Right-hand STATS Panel -->
+        <div class="stats-panel">
+          <div class="stats-top">
+            <span>STATS</span>
+            <span class="loaded-indicator">&#9632; LOADED</span>
+          </div>
+          <h3 class="stats-category-name" id="stats-title">ALL FILES</h3>
+          <div class="stats-row">
+            <span class="stats-label">FILES</span>
+            <span class="stats-val"><span id="stats-count">12</span> <span class="ascii-bar">||||||||||</span></span>
+          </div>
+          <div class="stats-row">
+            <span class="stats-label">TOOLS</span>
+            <span class="stats-val" id="stats-tools">PREMIERE + CAPCUT + AI</span>
+          </div>
+          <div class="stats-row">
+            <span class="stats-label">FORMAT</span>
+            <span class="stats-val" id="stats-format">9:16 REELS / 16:9 WIDE</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard-footer-hint">
+        <span><kbd>&larr;</kbd> <kbd>&rarr;</kbd> CLICK TO FILTER ARCHIVE</span>
+        <span>&middot;</span>
+        <span>MONOCHROME ARCHIVE SYSTEM v1.0</span>
+      </div>
+    </section>
+
+    <!-- 5. FOOTER / CONTACT SECTION -->
+    <footer class="footer-section" id="contact">
+      <div class="footer-divider">
+        <span>03 / BEHIND THE EDIT</span>
+      </div>
+
+      <div class="footer-main">
+        <div class="footer-left">
+          <h2 class="footer-heading">GOOD STORIES. BETTER EDITS.</h2>
+        </div>
+        <div class="footer-right">
+          <p>
+            I'm Jeremy, a freelance video editor and AI content creator. I bring rhythm, clarity, and intention to every frame—from scroll-stopping short-form content to direct-response ads and AI-enhanced stories.
+          </p>
+          <p class="footer-sub">Have a project in mind? Let's make the next cut count.</p>
+          <a href="mailto:jeremy@example.com" class="btn-pill btn-white">Get in Touch</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; 2026 JEREMY ROGER L. MAGUIGAD</span>
+        <span>LINKEDIN / YOUTUBE / GITHUB &mdash; PORTFOLIO</span>
+      </div>
+    </footer>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
