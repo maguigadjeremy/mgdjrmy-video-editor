@@ -46,28 +46,82 @@ const categoryMetadata = {
   "THUMBNAILS": { tools: "PHOTOSHOP + AI GENERATIVE", format: "AD CREATIVES & COVERS" }
 };
 
+const categoriesOrder = ["ALL", "E-COMMERCE", "SHORT FORM", "AI PRODUCTION", "COMMERCIALS", "THUMBNAILS"];
+const categoryIcons = {
+  "ALL": "⊞",
+  "E-COMMERCE": "◆",
+  "SHORT FORM": "▶",
+  "AI PRODUCTION": "✦",
+  "COMMERCIALS": "▣",
+  "THUMBNAILS": "◻"
+};
+
+// Start at index 2 ("SHORT FORM") or 0 ("ALL") — using circular wrap so cards always fan out on BOTH left and right sides!
+let currentCategoryIndex = 0;
+
 const gridEl = document.getElementById("archive-grid");
-const catCards = document.querySelectorAll(".cat-card");
+const catCards = document.querySelectorAll(".cf-card");
 const statsTitle = document.getElementById("stats-title");
 const statsCount = document.getElementById("stats-count");
 const statsTools = document.getElementById("stats-tools");
 const statsFormat = document.getElementById("stats-format");
 const topbarCount = document.getElementById("topbar-count");
 const headerFileCount = document.getElementById("header-file-count");
+const progressFill = document.getElementById("cf-progress-fill");
+const miniIcon = document.getElementById("cf-mini-icon");
 
-const categoriesOrder = ["ALL", "E-COMMERCE", "SHORT FORM", "AI PRODUCTION", "COMMERCIALS", "THUMBNAILS"];
-let currentCategoryIndex = 0;
-
-// Update category card count badges dynamically on load
 function updateCategoryBadges() {
   catCards.forEach(card => {
     const cat = card.dataset.category;
     const count = cat === "ALL"
       ? portfolioItems.length
       : portfolioItems.filter(i => i.category === cat).length;
-    const badgeSpans = card.querySelectorAll(".cat-card-top span");
-    if (badgeSpans.length > 1) {
-      badgeSpans[1].innerHTML = `&times;${count}`;
+    const badge = card.querySelector(".cf-count-badge");
+    if (badge) badge.textContent = `${count} FILES`;
+  });
+}
+
+// Circular 3D Coverflow so there are ALWAYS cards fanned out on both the Left and Right (just like Spotify photo)
+function updateCoverflow3D(activeIndex) {
+  const total = catCards.length;
+
+  catCards.forEach((card, idx) => {
+    // Calculate circular shortest distance so cards wrap symmetrically Left (-2, -1) and Right (+1, +2)
+    let offset = idx - activeIndex;
+    if (offset > total / 2) offset -= total;
+    if (offset < -total / 2) offset += total;
+
+    const absOffset = Math.abs(offset);
+
+    if (offset === 0) {
+      // Center Spotlight Card
+      card.style.transform = `translateX(0px) translateZ(70px) rotateY(0deg) scale(1)`;
+      card.style.zIndex = 30;
+      card.style.opacity = 1;
+      card.style.filter = "blur(0px) brightness(1)";
+      card.style.pointerEvents = "auto";
+      card.classList.add("active");
+    } else if (absOffset <= 2) {
+      // 2 Cards fanned out on the Left (-1, -2) and 2 Cards fanned out on the Right (+1, +2)
+      const direction = Math.sign(offset);
+      const translateX = direction * (155 + (absOffset - 1) * 115);
+      const translateZ = -absOffset * 80;
+      const rotateY = -direction * (22 + absOffset * 6);
+      const scale = 1 - absOffset * 0.11;
+
+      card.style.transform = `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`;
+      card.style.zIndex = 30 - absOffset * 5;
+      card.style.opacity = absOffset === 1 ? 0.88 : 0.55;
+      card.style.filter = `blur(${absOffset === 1 ? 0.6 : 1.8}px) brightness(${absOffset === 1 ? 0.78 : 0.52})`;
+      card.style.pointerEvents = "auto";
+      card.classList.remove("active");
+    } else {
+      // Hidden back card
+      card.style.transform = `translateX(0px) translateZ(-220px) scale(0.6)`;
+      card.style.zIndex = 1;
+      card.style.opacity = 0;
+      card.style.pointerEvents = "none";
+      card.classList.remove("active");
     }
   });
 }
@@ -88,7 +142,6 @@ function createCardHTML(item) {
   `;
 }
 
-// Attach independent click-and-drag + horizontal wheel scrolling to each row
 function attachRowScrollListeners() {
   const rows = document.querySelectorAll(".archive-row");
 
@@ -103,13 +156,8 @@ function attachRowScrollListeners() {
       scrollLeft = row.scrollLeft;
     });
 
-    row.addEventListener("mouseleave", () => {
-      isDown = false;
-    });
-
-    row.addEventListener("mouseup", () => {
-      isDown = false;
-    });
+    row.addEventListener("mouseleave", () => { isDown = false; });
+    row.addEventListener("mouseup", () => { isDown = false; });
 
     row.addEventListener("mousemove", (e) => {
       if (!isDown) return;
@@ -119,7 +167,6 @@ function attachRowScrollListeners() {
       row.scrollLeft = scrollLeft - walk;
     });
 
-    // Optional: Allow Shift + Mouse Wheel or Horizontal Trackpad swipe per row
     row.addEventListener("wheel", (e) => {
       if (Math.abs(e.deltaX) > Math.abs(e.deltaY) || e.shiftKey) {
         e.preventDefault();
@@ -130,16 +177,23 @@ function attachRowScrollListeners() {
 }
 
 function renderArchive(filterCategory = "ALL") {
+  if (!gridEl) return;
+
   const filtered = filterCategory === "ALL"
     ? portfolioItems
     : portfolioItems.filter(item => item.category === filterCategory);
 
-  // Split items evenly between Row 1 (even index) and Row 2 (odd index)
-  const row1Items = filtered.filter((_, idx) => idx % 2 === 0);
-  const row2Items = filtered.filter((_, idx) => idx % 2 !== 0);
+  // Only split into TWO rows if there are at least 20 videos (10+ per row to fill the screen width).
+  // Otherwise (like E-Commerce with 12 files), keep them in ONE full horizontal scrollable row!
+  const useSingleRow = filtered.length < 20;
+  const row1Items = useSingleRow ? filtered : filtered.filter((_, idx) => idx % 2 === 0);
+  const row2Items = useSingleRow ? [] : filtered.filter((_, idx) => idx % 2 !== 0);
+
+  // Only center the row if it has fewer than 10 cards (so 12 cards can scroll smoothly from the left)
+  const rowClass = filtered.length < 10 ? "archive-row centered-row" : "archive-row";
 
   gridEl.innerHTML = `
-    <div class="archive-row" id="archive-row-1">
+    <div class="${rowClass}" id="archive-row-1">
       ${row1Items.map(createCardHTML).join("")}
     </div>
     ${row2Items.length > 0 ? `
@@ -148,26 +202,31 @@ function renderArchive(filterCategory = "ALL") {
     </div>` : ""}
   `;
 
-  // Activate independent scrolling for both rows
   attachRowScrollListeners();
 
-  // Update Stats & Counters
   const count = filtered.length;
-  statsTitle.textContent = filterCategory === "ALL" ? "ALL FILES" : filterCategory;
-  statsCount.textContent = count;
-  topbarCount.textContent = `${count} FILES`;
-  headerFileCount.textContent = count;
+  if (statsTitle) statsTitle.textContent = filterCategory === "ALL" ? "ALL ARCHIVE" : filterCategory;
+  if (statsCount) statsCount.textContent = count;
+  if (headerFileCount) headerFileCount.textContent = count;
+  if (topbarCount) topbarCount.textContent = `ALL (${portfolioItems.length})`;
 
   const meta = categoryMetadata[filterCategory] || categoryMetadata["ALL"];
-  statsTools.textContent = meta.tools;
-  statsFormat.textContent = meta.format;
+  if (statsTools) statsTools.textContent = meta.tools;
+  if (statsFormat) statsFormat.textContent = meta.format;
+
+  if (progressFill) {
+    const pct = ((currentCategoryIndex + 1) / categoriesOrder.length) * 100;
+    progressFill.style.width = `${pct}%`;
+  }
+  if (miniIcon) {
+    miniIcon.textContent = categoryIcons[filterCategory] || "⊞";
+  }
 }
 
 function setActiveCategory(category) {
   currentCategoryIndex = categoriesOrder.indexOf(category);
-  catCards.forEach(card => {
-    card.classList.toggle("active", card.dataset.category === category);
-  });
+  if (currentCategoryIndex === -1) currentCategoryIndex = 0;
+  updateCoverflow3D(currentCategoryIndex);
   renderArchive(category);
 }
 
@@ -177,24 +236,32 @@ catCards.forEach(card => {
   });
 });
 
-document.querySelector(".view-all-btn").addEventListener("click", () => {
-  setActiveCategory("ALL");
-});
+const viewAllBtn = document.querySelector(".view-all-btn");
+if (viewAllBtn) {
+  viewAllBtn.addEventListener("click", () => setActiveCategory("ALL"));
+}
 
-document.getElementById("reset-cat").addEventListener("click", () => {
-  setActiveCategory("ALL");
-});
+const resetBtn = document.getElementById("reset-cat");
+if (resetBtn) {
+  resetBtn.addEventListener("click", () => setActiveCategory("ALL"));
+}
 
-document.getElementById("prev-cat").addEventListener("click", () => {
-  currentCategoryIndex = (currentCategoryIndex - 1 + categoriesOrder.length) % categoriesOrder.length;
-  setActiveCategory(categoriesOrder[currentCategoryIndex]);
-});
+const prevBtn = document.getElementById("prev-cat");
+if (prevBtn) {
+  prevBtn.addEventListener("click", () => {
+    currentCategoryIndex = (currentCategoryIndex - 1 + categoriesOrder.length) % categoriesOrder.length;
+    setActiveCategory(categoriesOrder[currentCategoryIndex]);
+  });
+}
 
-document.getElementById("next-cat").addEventListener("click", () => {
-  currentCategoryIndex = (currentCategoryIndex + 1) % categoriesOrder.length;
-  setActiveCategory(categoriesOrder[currentCategoryIndex]);
-});
+const nextBtn = document.getElementById("next-cat");
+if (nextBtn) {
+  nextBtn.addEventListener("click", () => {
+    currentCategoryIndex = (currentCategoryIndex + 1) % categoriesOrder.length;
+    setActiveCategory(categoriesOrder[currentCategoryIndex]);
+  });
+}
 
-// Initial Setup
+// Initial Render
 updateCategoryBadges();
-renderArchive("ALL");
+setActiveCategory("ALL");

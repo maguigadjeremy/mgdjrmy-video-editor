@@ -102,117 +102,127 @@
       </div>
     </section>
 
-    <!-- 3. SELECTED WORK ARCHIVE GRID -->
+    <!-- 3. SELECTED WORK ARCHIVE + 3D COVERFLOW CATEGORY DECK -->
     <section class="archive-section" id="archive">
       <div class="archive-header">
-        <p class="archive-meta">&bull; THE ARCHIVE &middot; <span id="header-file-count">12</span> FILES &bull;</p>
-        <h2 class="archive-title">FEATURED <span class="mono-accent">PROJECT</span></h2>
+        <p class="archive-meta">&bull; THE ARCHIVE &middot; <span id="header-file-count">36</span> FILES &bull;</p>
+        <h2 class="archive-title">SELECTED <span class="mono-accent">WORK</span></h2>
       </div>
 
-      <!-- Dynamic Grid populated by script.js -->
+      <!-- 2-Row Edge-to-Edge Horizontal Video Archive -->
       <div class="archive-grid" id="archive-grid"></div>
-    </section>
 
-    <!-- 4. INTERACTIVE SELECT CATEGORY DASHBOARD -->
-    <section class="category-dashboard" id="categories">
-      <div class="dashboard-topbar">
-        <div class="topbar-left">
-          <span class="p1-badge">P1</span>
-          <span class="dashboard-title">SELECT CATEGORY</span>
-          <span class="dashboard-count" id="topbar-count">12 FILES</span>
-        </div>
-        <div class="topbar-right">
-          <button class="icon-btn" id="prev-cat" title="Previous Category">&lt;</button>
-          <button class="icon-btn" id="reset-cat" title="Reset to All">||</button>
-          <button class="icon-btn" id="next-cat" title="Next Category">&gt;</button>
-          <button class="view-all-btn" data-filter="ALL">&#8862; VIEW ALL FILES</button>
-        </div>
-      </div>
-
-      <div class="dashboard-body">
-        <!-- 6 Category Cards -->
-        <div class="category-cards" id="category-cards">
-          <button class="cat-card active" data-category="ALL">
-            <div class="cat-card-top">
-              <span>01</span>
-              <span>&times;12</span>
-            </div>
-            <div class="cat-icon">&#8862;</div>
-            <div class="cat-name">ALL</div>
-          </button>
-
-          <button class="cat-card" data-category="E-COMMERCE">
-            <div class="cat-card-top">
-              <span>02</span>
-              <span>&times;3</span>
-            </div>
-            <div class="cat-icon">&#128717;</div>
-            <div class="cat-name">E-COMMERCE</div>
-          </button>
-
-          <button class="cat-card" data-category="SHORT FORM">
-            <div class="cat-card-top">
-              <span>03</span>
-              <span>&times;3</span>
-            </div>
-            <div class="cat-icon">&#128241;</div>
-            <div class="cat-name">SHORT FORM</div>
-          </button>
-
-          <button class="cat-card" data-category="AI PRODUCTION">
-            <div class="cat-card-top">
-              <span>04</span>
-              <span>&times;3</span>
-            </div>
-            <div class="cat-icon">&#10024;</div>
-            <div class="cat-name">AI PRODUCTION</div>
-          </button>
-
-          <button class="cat-card" data-category="COMMERCIALS">
-            <div class="cat-card-top">
-              <span>05</span>
-              <span>&times;2</span>
-            </div>
-            <div class="cat-icon">&#127916;</div>
-            <div class="cat-name">COMMERCIALS</div>
-          </button>
-
-          <button class="cat-card" data-category="THUMBNAILS">
-            <div class="cat-card-top">
-              <span>06</span>
-              <span>&times;1</span>
-            </div>
-            <div class="cat-icon">&#128444;</div>
-            <div class="cat-name">THUMBNAILS</div>
-          </button>
+      <!-- 4. 3D COVERFLOW CATEGORY SELECTOR (SPOTIFY / VISION OS INSPIRED) -->
+      <div class="coverflow-showcase" id="categories">
+        <div class="coverflow-header-badge">
+          <span class="cf-wave">&#9679;</span> SELECT ARCHIVE PLAYLIST
         </div>
 
-        <!-- Right-hand STATS Panel -->
-        <div class="stats-panel">
-          <div class="stats-top">
-            <span>STATS</span>
-            <span class="loaded-indicator">&#9632; LOADED</span>
+        <!-- 3D Perspective Stage -->
+        <div class="coverflow-stage" id="category-cards">
+          <div class="cf-card active" data-category="ALL" data-index="0">
+            <div class="cf-artwork">
+              <span class="cf-tag">PLAYLIST // 01</span>
+              <div class="cf-art-graphic">&#8862;</div>
+              <span class="cf-count-badge">36 FILES</span>
+            </div>
+            <div class="cf-card-meta">
+              <h4>All Archive</h4>
+              <p>Complete Video &amp; AI Reel</p>
+            </div>
           </div>
-          <h3 class="stats-category-name" id="stats-title">ALL FILES</h3>
-          <div class="stats-row">
-            <span class="stats-label">FILES</span>
-            <span class="stats-val"><span id="stats-count">12</span> <span class="ascii-bar">||||||||||</span></span>
+
+          <div class="cf-card" data-category="E-COMMERCE" data-index="1">
+            <div class="cf-artwork">
+              <span class="cf-tag">PLAYLIST // 02</span>
+              <div class="cf-art-graphic">&#9670;</div>
+              <span class="cf-count-badge">12 FILES</span>
+            </div>
+            <div class="cf-card-meta">
+              <h4>E-Commerce</h4>
+              <p>Direct-Response &amp; UGC Ads</p>
+            </div>
           </div>
-          <div class="stats-row">
-            <span class="stats-label">TOOLS</span>
-            <span class="stats-val" id="stats-tools">PREMIERE + CAPCUT + AI</span>
+
+          <div class="cf-card" data-category="SHORT FORM" data-index="2">
+            <div class="cf-artwork">
+              <span class="cf-tag">PLAYLIST // 03</span>
+              <div class="cf-art-graphic">&#9654;</div>
+              <span class="cf-count-badge">7 FILES</span>
+            </div>
+            <div class="cf-card-meta">
+              <h4>Short Form</h4>
+              <p>High-Retention TikTok &amp; Reels</p>
+            </div>
           </div>
-          <div class="stats-row">
-            <span class="stats-label">FORMAT</span>
-            <span class="stats-val" id="stats-format">9:16 REELS / 16:9 WIDE</span>
+
+          <div class="cf-card" data-category="AI PRODUCTION" data-index="3">
+            <div class="cf-artwork">
+              <span class="cf-tag">PLAYLIST // 04</span>
+              <div class="cf-art-graphic">&#10022;</div>
+              <span class="cf-count-badge">7 FILES</span>
+            </div>
+            <div class="cf-card-meta">
+              <h4>AI Production</h4>
+              <p>HeyGen, Runway &amp; ElevenLabs</p>
+            </div>
+          </div>
+
+          <div class="cf-card" data-category="COMMERCIALS" data-index="4">
+            <div class="cf-artwork">
+              <span class="cf-tag">PLAYLIST // 05</span>
+              <div class="cf-art-graphic">&#9635;</div>
+              <span class="cf-count-badge">5 FILES</span>
+            </div>
+            <div class="cf-card-meta">
+              <h4>Commercials</h4>
+              <p>Brand Films &amp; Real Estate</p>
+            </div>
+          </div>
+
+          <div class="cf-card" data-category="THUMBNAILS" data-index="5">
+            <div class="cf-artwork">
+              <span class="cf-tag">PLAYLIST // 06</span>
+              <div class="cf-art-graphic">&#9723;</div>
+              <span class="cf-count-badge">5 FILES</span>
+            </div>
+            <div class="cf-card-meta">
+              <h4>Thumbnails</h4>
+              <p>Ad Creatives &amp; Visual Covers</p>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="dashboard-footer-hint">
-        <span><kbd>&larr;</kbd> <kbd>&rarr;</kbd> CLICK TO FILTER ARCHIVE</span>
-        <span>&middot;</span>
-        <span>MONOCHROME ARCHIVE SYSTEM v1.0</span>
+        <!-- Bottom Frosted Glass Media Player Bar -->
+        <div class="cf-player-bar">
+          <!-- Left Transport Controls -->
+          <div class="cf-controls-left">
+            <button class="cf-ctrl-btn" id="prev-cat" title="Previous Category">&#9198;</button>
+            <button class="cf-ctrl-btn cf-pause-btn" id="reset-cat" title="Reset to All Files">&#10074;&#10074;</button>
+            <button class="cf-ctrl-btn" id="next-cat" title="Next Category">&#9197;</button>
+          </div>
+
+          <!-- Center Now-Playing Pill -->
+          <div class="cf-now-playing">
+            <div class="cf-mini-thumb" id="cf-mini-icon">&#8862;</div>
+            <div class="cf-np-text">
+              <div class="cf-np-top">
+                <span class="cf-np-title" id="stats-title">ALL FILES</span>
+                <span class="cf-np-count"><span id="stats-count">36</span> CUTS</span>
+              </div>
+              <span class="cf-np-sub" id="stats-tools">PREMIERE + CAPCUT + AI</span>
+              <div class="cf-progress-track">
+                <div class="cf-progress-fill" id="cf-progress-fill"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Format & View All -->
+          <div class="cf-controls-right">
+            <span class="cf-format-tag" id="stats-format">36 REELS &amp; STATICS</span>
+            <button class="cf-all-pill view-all-btn" data-filter="ALL" id="topbar-count">ALL (36)</button>
+          </div>
+        </div>
       </div>
     </section>
 
