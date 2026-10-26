@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="12" fill="#070707"/>
+  <!-- Viewfinder corners -->
+  <path d="M11 23V11h12M41 11h12v12M11 41v12h12" fill="none" stroke="#ffffff" stroke-width="4.5"/>
+  <!-- Play button -->
+  <path d="M25 21l19 11-19 11z" fill="#ffffff"/>
+  <!-- Pixel step (bottom-right), same motif as the site's photo frames -->
+  <g fill="#ffffff">
+    <rect x="49" y="41" width="4" height="4"/>
+    <rect x="45" y="45" width="8" height="4"/>
+    <rect x="41" y="49" width="12" height="4"/>
+  </g>
+</svg>

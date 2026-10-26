@@ -4,29 +4,62 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jeremy Roger L. Maguigad | Video Editor & AI Content Creator</title>
+  <!-- Favicons: SVG for modern browsers, PNG fallbacks, Apple home-screen icon -->
+  <link rel="icon" href="icons/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="icons/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#070707">
   <!-- Google Fonts matching your exact Framer design -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  <!-- Bump ?v= whenever style.css / script.js change so browsers don't serve a stale copy -->
+  <link rel="stylesheet" href="style.css?v=11" />
 </head>
 <body>
 
+  <!-- Intro loader (hidden by script.js; the CSS fades it out on its own after 3s as a fail-safe) -->
+  <div class="page-loader" id="page-loader" aria-hidden="true">
+    <div class="loader-inner">
+      <span class="loader-logo">JRM.</span>
+      <div class="loader-bar"><span id="loader-fill"></span></div>
+      <div class="loader-meta"><span>RENDERING PORTFOLIO</span><span id="loader-pct">0%</span></div>
+    </div>
+  </div>
+
   <!-- TOP NAVIGATION -->
   <header class="navbar">
-    <a href="#" class="logo">JRM.</a>
-    <nav class="nav-links">
+    <a href="#home" class="brand">
+      <span class="logo">JRM.</span>
+      <span class="brand-meta">JEREMY ROGER L. MAGUIGAD<br><span>VIDEO EDITOR &amp; AI CREATOR</span></span>
+    </a>
+
+    <!-- Tab-style links; the current section's tab is highlighted by script.js -->
+    <nav class="nav-links" id="nav-links">
       <a href="#showreel">Showreel</a>
-      <a href="#archive">Portfolio</a>
-      <a href="#categories">Categories</a>
+      <a href="#archive">Projects</a>
+      <a href="#about">About</a>
+      <a href="#tools">Toolkit</a>
       <a href="#contact">Contact</a>
     </nav>
+
+    <div class="nav-right">
+      <span class="nav-clock" id="nav-clock" title="My local time (Philippines, GMT+8)">PH --:--</span>
+      <span class="nav-status"><span class="status-live"></span>AVAILABLE</span>
+      <a href="#contact" class="nav-cta">HIRE ME <span aria-hidden="true">&rarr;</span></a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Scroll progress "playhead" along the bottom edge -->
+    <div class="nav-progress" aria-hidden="true"><span id="nav-progress-fill"></span></div>
   </header>
 
   <main class="container">
 
     <!-- 1. HERO SECTION (Framer Split Layout) -->
-    <section class="hero" id="about">
+    <section class="hero" id="home">
       <div class="hero-left">
         <p class="script-intro">Hello, I'm</p>
         <h1 class="hero-title">JEREMY ROGER<br>L. MAGUIGAD</h1>
@@ -36,17 +69,27 @@
         </p>
         <div class="hero-actions">
           <a href="#archive" class="btn-pill btn-white">View My Work</a>
+          <a href="#contact" class="btn-pill btn-outline">Get in Touch</a>
         </div>
       </div>
 
       <div class="hero-right">
-        <div class="portrait-placeholder">
-          <svg viewBox="0 0 200 220" class="portrait-svg">
-            <ellipse cx="100" cy="60" rx="36" ry="44" fill="none" stroke="#ffffff" stroke-width="1.2"/>
-            <path d="M 20 210 C 20 135, 180 135, 180 210 Z" fill="none" stroke="#ffffff" stroke-width="1.2"/>
-          </svg>
-          <span class="placeholder-label">PORTRAIT / IMAGE PLACEHOLDER</span>
-        </div>
+        <figure class="hero-photo">
+          <div class="hero-photo-frame">
+            <img src="images/portrait.jpg" alt="Portrait of Jeremy Roger L. Maguigad" width="521" height="700">
+            <span class="vf vf-tl" aria-hidden="true"></span>
+            <span class="vf vf-tr" aria-hidden="true"></span>
+            <span class="vf vf-bl" aria-hidden="true"></span>
+            <svg class="pixel-corner" viewBox="0 0 3 3" aria-hidden="true">
+              <rect x="2" y="0" width="1" height="1"/><rect x="1" y="1" width="2" height="1"/>
+              <rect x="0" y="2" width="3" height="1"/>
+            </svg>
+          </div>
+          <figcaption class="hero-photo-cap">
+            <span>JRM_PORTRAIT.RAW</span>
+            <span>B&amp;W &middot; PH</span>
+          </figcaption>
+        </figure>
       </div>
     </section>
 
@@ -60,7 +103,7 @@
           HIGH-IMPACT EDITS THAT <span class="text-outline">STOP THE SCROLL</span> & DRIVE RESULTS
         </h2>
         <p class="showreel-desc">
-          Helping brands and creators turn ideas into high-performing content across Premiere Pro, CapCut, HeyGen, Runway, and ElevenLabs.
+          Helping brands and creators turn ideas into high-performing content across CapCut, Canva, HeyGen, Higgsfield, and ElevenLabs.
         </p>
 
         <div class="feature-tags">
@@ -78,26 +121,27 @@
       <div class="showreel-right">
         <!-- Floating Badge Top Right -->
         <div class="floating-badge badge-top">
-          <span class="badge-num">+45%</span>
-          <span class="badge-text">Avg. Retention</span>
+          <span class="badge-num">9:16 &middot; 16:9</span>
+          <span class="badge-text">Reels, Shorts &amp; Ads</span>
         </div>
 
         <!-- 16:9 Landscape Tablet Mockup -->
         <div class="tablet-frame">
           <div class="tablet-camera"></div>
           <div class="tablet-screen">
-            <div class="video-placeholder-inner">
-              <button class="play-btn" aria-label="Play Showreel">&#9654;</button>
-              <span class="mono-label">16:9 MAIN SHOWREEL PLACEHOLDER</span>
-              <span class="mono-sub">DROP YOUTUBE / VIMEO / MP4 EMBED HERE</span>
-            </div>
+            <!-- Plays muted on its own while on screen (script.js); the sound button unmutes and restarts it -->
+            <video class="showreel-video" id="showreel-video" src="videos/showreel.mp4?v=2" poster="images/showreel-poster.jpg" muted loop playsinline preload="metadata" aria-label="Jeremy's main showreel"></video>
+            <button class="sr-sound" id="sr-sound" type="button" aria-pressed="false">
+              <span class="sr-sound-icon" aria-hidden="true">&#9834;</span>
+              <span class="sr-sound-label">SOUND OFF</span>
+            </button>
           </div>
         </div>
 
         <!-- Floating Badge Bottom Left -->
         <div class="floating-badge badge-bottom">
-          <span class="badge-num">1.2M+</span>
-          <span class="badge-text">Total Views</span>
+          <span class="badge-num">AI + CRAFT</span>
+          <span class="badge-text">Hybrid Workflow</span>
         </div>
       </div>
     </section>
@@ -106,7 +150,7 @@
     <section class="archive-section" id="archive">
       <div class="archive-header">
         <p class="archive-meta">&bull; THE ARCHIVE &middot; <span id="header-file-count">36</span> FILES &bull;</p>
-        <h2 class="archive-title">SELECTED <span class="mono-accent">WORK</span></h2>
+        <h2 class="archive-title">FEATURED <span class="mono-accent">PROJECTS</span></h2>
       </div>
 
       <!-- 2-Row Edge-to-Edge Horizontal Video Archive -->
@@ -132,15 +176,15 @@
             </div>
           </div>
 
-          <div class="cf-card" data-category="E-COMMERCE" data-index="1">
+          <div class="cf-card" data-category="UGC ADS" data-index="1">
             <div class="cf-artwork">
               <span class="cf-tag">PLAYLIST // 02</span>
               <div class="cf-art-graphic">&#9670;</div>
               <span class="cf-count-badge">12 FILES</span>
             </div>
             <div class="cf-card-meta">
-              <h4>E-Commerce</h4>
-              <p>Direct-Response &amp; UGC Ads</p>
+              <h4>UGC Ads</h4>
+              <p>Creator-Style &amp; Direct-Response</p>
             </div>
           </div>
 
@@ -156,39 +200,39 @@
             </div>
           </div>
 
-          <div class="cf-card" data-category="AI PRODUCTION" data-index="3">
+          <div class="cf-card" data-category="AI ANIMATION" data-index="3">
             <div class="cf-artwork">
               <span class="cf-tag">PLAYLIST // 04</span>
               <div class="cf-art-graphic">&#10022;</div>
               <span class="cf-count-badge">7 FILES</span>
             </div>
             <div class="cf-card-meta">
-              <h4>AI Production</h4>
-              <p>HeyGen, Runway &amp; ElevenLabs</p>
+              <h4>AI Animation</h4>
+              <p>HeyGen, Higgsfield &amp; ElevenLabs</p>
             </div>
           </div>
 
-          <div class="cf-card" data-category="COMMERCIALS" data-index="4">
+          <div class="cf-card" data-category="LONG FORMS" data-index="4">
             <div class="cf-artwork">
               <span class="cf-tag">PLAYLIST // 05</span>
               <div class="cf-art-graphic">&#9635;</div>
               <span class="cf-count-badge">5 FILES</span>
             </div>
             <div class="cf-card-meta">
-              <h4>Commercials</h4>
-              <p>Brand Films &amp; Real Estate</p>
+              <h4>Long Forms</h4>
+              <p>16:9 Brand Films &amp; Real Estate</p>
             </div>
           </div>
 
-          <div class="cf-card" data-category="THUMBNAILS" data-index="5">
+          <div class="cf-card" data-category="STATIC ADS" data-index="5">
             <div class="cf-artwork">
               <span class="cf-tag">PLAYLIST // 06</span>
               <div class="cf-art-graphic">&#9723;</div>
               <span class="cf-count-badge">5 FILES</span>
             </div>
             <div class="cf-card-meta">
-              <h4>Thumbnails</h4>
-              <p>Ad Creatives &amp; Visual Covers</p>
+              <h4>Static Ads</h4>
+              <p>Static Ad Creatives</p>
             </div>
           </div>
         </div>
@@ -210,7 +254,7 @@
                 <span class="cf-np-title" id="stats-title">ALL FILES</span>
                 <span class="cf-np-count"><span id="stats-count">36</span> CUTS</span>
               </div>
-              <span class="cf-np-sub" id="stats-tools">PREMIERE + CAPCUT + AI</span>
+              <span class="cf-np-sub" id="stats-tools">CAPCUT + CANVA + AI</span>
               <div class="cf-progress-track">
                 <div class="cf-progress-fill" id="cf-progress-fill"></div>
               </div>
@@ -223,36 +267,439 @@
             <button class="cf-all-pill view-all-btn" data-filter="ALL" id="topbar-count">ALL (36)</button>
           </div>
         </div>
+
+        <!-- Points at the selected category's Drive folder (set by script.js) -->
+        <a class="drive-link" id="drive-folder-link" href="#" target="_blank" rel="noopener">
+          BROWSE EVERY VERSION ON GOOGLE DRIVE <span aria-hidden="true">&#8599;</span>
+        </a>
       </div>
     </section>
 
-    <!-- 5. FOOTER / CONTACT SECTION -->
-    <footer class="footer-section" id="contact">
-      <div class="footer-divider">
-        <span>03 / BEHIND THE EDIT</span>
+    <!-- 4b. HOW I WORK -->
+    <section class="process-section" id="process">
+      <div class="section-divider">
+        <span>01 / HOW I WORK</span>
+        <span>THE PIPELINE</span>
       </div>
 
-      <div class="footer-main">
-        <div class="footer-left">
-          <h2 class="footer-heading">GOOD STORIES. BETTER EDITS.</h2>
+      <div class="process-header">
+        <h2 class="process-heading">RAW FOOTAGE IN. <span class="text-outline">SCROLL-STOPPERS</span> OUT.</h2>
+        <p class="process-intro">
+          No guesswork and no endless back-and-forth. Every project runs through the same four-stage pipeline, built around one question: will this keep someone watching?
+        </p>
+      </div>
+
+      <!-- Timeline track: one node per step, like markers on a sequence -->
+      <div class="process-track" aria-hidden="true">
+        <span>00:00</span><span>00:15</span><span>00:30</span><span>00:45</span>
+      </div>
+
+      <ol class="process-steps">
+        <li class="process-step">
+          <span class="step-num" aria-hidden="true">01</span>
+          <span class="step-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg>
+          </span>
+          <p class="step-tag">STEP 01</p>
+          <h3>Intake &amp; Research</h3>
+          <p>You send the footage, the offer, and who it's for. I study your brand and the ads already winning in your niche before cutting anything.</p>
+        </li>
+        <li class="process-step">
+          <span class="step-num" aria-hidden="true">02</span>
+          <span class="step-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </span>
+          <p class="step-tag">STEP 02</p>
+          <h3>Hook Lab</h3>
+          <p>I plan the opening seconds and the story beats, so the edit has a direction before the timeline even opens.</p>
+        </li>
+        <li class="process-step">
+          <span class="step-num" aria-hidden="true">03</span>
+          <span class="step-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+          </span>
+          <p class="step-tag">STEP 03</p>
+          <h3>Cut &amp; Polish</h3>
+          <p>Pacing, captions, sound design, motion, and AI elements come together, then we tighten it until every frame earns its place.</p>
+        </li>
+        <li class="process-step">
+          <span class="step-num" aria-hidden="true">04</span>
+          <span class="step-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          </span>
+          <p class="step-tag">STEP 04</p>
+          <h3>Export &amp; Test</h3>
+          <p>Delivered in the sizes your platforms need, with hook variations so you can test what wins.</p>
+        </li>
+      </ol>
+
+      <div class="process-values">
+        <div class="value-card">
+          <span class="value-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </span>
+          <h3>12&ndash;24H Turnaround</h3>
+          <p>Most projects land back in your inbox within a day, without cutting corners on quality.</p>
         </div>
-        <div class="footer-right">
-          <p>
-            I'm Jeremy, a freelance video editor and AI content creator. I bring rhythm, clarity, and intention to every frame—from scroll-stopping short-form content to direct-response ads and AI-enhanced stories.
+        <div class="value-card value-card--invert">
+          <span class="value-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </span>
+          <h3>Edited to Be Watched</h3>
+          <p>Hooks, pacing, and pattern breaks are planned to hold attention, not just to look good.</p>
+        </div>
+        <div class="value-card">
+          <span class="value-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </span>
+          <h3>One Editor, Start to Finish</h3>
+          <p>You talk to the person actually cutting your video. No account managers, no handoffs.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. ABOUT ME -->
+    <section class="about-section" id="about">
+      <div class="section-divider">
+        <span>02 / ABOUT ME</span>
+        <span>BEHIND THE EDIT</span>
+      </div>
+
+      <!-- About styled as an editing-software window: monitor + inspector + timeline + render stats -->
+      <div class="edit-window">
+        <div class="win-bar">
+          <span class="win-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="win-title">ABOUT_JEREMY.PROJ</span>
+          <span class="win-rec"><span class="rec-dot"></span>REC</span>
+          <span class="win-tc">00:00:24:12</span>
+        </div>
+
+        <div class="win-body">
+          <!-- Program monitor -->
+          <div class="monitor">
+            <p class="pane-label">PROGRAM // CAM_A</p>
+            <div class="monitor-frame">
+              <div class="photo-slot">
+                <img src="images/workspace.jpg" alt="Jeremy editing a video timeline at his desk" width="896" height="1200" loading="lazy">
+              </div>
+              <span class="vf vf-tl" aria-hidden="true"></span>
+              <span class="vf vf-tr" aria-hidden="true"></span>
+              <span class="vf vf-bl" aria-hidden="true"></span>
+              <span class="osd osd-tl"><span class="rec-dot"></span>REC</span>
+              <span class="osd osd-tr">4K &middot; 24FPS</span>
+              <span class="osd osd-bl">TC 00:00:24:12</span>
+              <svg class="pixel-corner" viewBox="0 0 3 3" aria-hidden="true">
+                <rect x="2" y="0" width="1" height="1"/><rect x="1" y="1" width="2" height="1"/>
+                <rect x="0" y="2" width="3" height="1"/>
+              </svg>
+            </div>
+            <div class="transport">
+              <span class="transport-btns" aria-hidden="true">&#9198;&nbsp;&nbsp;&#9654;&nbsp;&nbsp;&#9197;</span>
+              <span>EDIT_BAY_01.MOV</span>
+            </div>
+          </div>
+
+          <!-- Inspector -->
+          <div class="inspector">
+            <p class="pane-label">INSPECTOR // CLIP INFO</p>
+            <h2 class="about-heading">GOOD STORIES.<br><span class="text-outline">BETTER EDITS.</span></h2>
+            <p class="about-lead">
+              I'm <strong>Jeremy</strong>, a freelance video editor and AI content creator who turns raw footage into stories that connect. Every cut has a reason: rhythm, clarity, and intention.
+            </p>
+
+            <dl class="meta-table">
+              <div><dt>NAME</dt><dd>Jeremy Roger L. Maguigad</dd></div>
+              <div><dt>ROLE</dt><dd>Video Editor &amp; AI Content Creator</dd></div>
+              <div><dt>BASED</dt><dd>Philippines &middot; GMT+8</dd></div>
+              <div><dt>STATUS</dt><dd><span class="status-live"></span>Available for work</dd></div>
+              <div><dt>FOCUS</dt><dd>Short-form, UGC &amp; direct-response ads</dd></div>
+              <div><dt>STACK</dt><dd>CapCut &middot; HeyGen &middot; Higgsfield &middot; ElevenLabs</dd></div>
+            </dl>
+
+            <a href="#contact" class="btn-square">LET'S TALK <span aria-hidden="true">&rarr;</span></a>
+          </div>
+        </div>
+
+        <!-- Timeline: services laid out as clips on tracks -->
+        <div class="timeline">
+          <div class="timeline-scroll">
+            <div class="timeline-inner">
+              <span class="tl-playhead" aria-hidden="true"></span>
+
+              <div class="tl-row tl-ruler">
+                <span class="tl-head">SEQ_01</span>
+                <div class="tl-ticks"><span>00:00</span><span>00:15</span><span>00:30</span><span>00:45</span><span>01:00</span></div>
+              </div>
+
+              <div class="tl-row tl-track">
+                <span class="tl-head">V2</span>
+                <div class="tl-lane">
+                  <span class="clip-gap" style="flex: 1.2"></span>
+                  <div class="clip clip--overlay" style="flex: 4">
+                    <strong>AI ANIMATION</strong>
+                    <small>AVATARS &middot; AI B-ROLL &middot; AI VOICE</small>
+                  </div>
+                  <span class="clip-gap" style="flex: 0.6"></span>
+                  <div class="clip clip--overlay" style="flex: 3">
+                    <strong>STATIC ADS</strong>
+                    <small>COVERS &middot; AD STATICS</small>
+                  </div>
+                  <span class="clip-gap" style="flex: 1.2"></span>
+                </div>
+              </div>
+
+              <div class="tl-row tl-track">
+                <span class="tl-head">V1</span>
+                <div class="tl-lane">
+                  <div class="clip clip--video" style="flex: 1.3">
+                    <strong>HOOK</strong>
+                    <small>0&ndash;3S</small>
+                  </div>
+                  <div class="clip clip--video" style="flex: 3">
+                    <strong>SHORT-FORM</strong>
+                    <small>TIKTOK &middot; REELS &middot; SHORTS</small>
+                  </div>
+                  <div class="clip clip--video" style="flex: 3.2">
+                    <strong>UGC ADS</strong>
+                    <small>E-COMMERCE &middot; CLEAR CTA</small>
+                  </div>
+                  <div class="clip clip--video" style="flex: 2.5">
+                    <strong>LONG FORMS</strong>
+                    <small>BRAND &middot; REAL ESTATE</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tl-row tl-track tl-track--audio">
+                <span class="tl-head">A1</span>
+                <div class="tl-lane waveform" id="waveform" aria-hidden="true"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inverted render-stats strip -->
+        <div class="render-stats">
+          <p class="render-label">TRACK <br>RECORD</p>
+          <div class="render-stat">
+            <span class="render-num">2+</span>
+            <span class="render-cap">YEARS OF EXPERIENCE</span>
+          </div>
+          <div class="render-stat">
+            <span class="render-num">100+</span>
+            <span class="render-cap">VIDEOS EDITED</span>
+          </div>
+          <div class="render-stat">
+            <span class="render-num">12&ndash;24H</span>
+            <span class="render-cap">TURNAROUND</span>
+          </div>
+          <div class="render-stat">
+            <span class="render-num">7+</span>
+            <span class="render-cap">EDIT &amp; AI TOOLS</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. TOOLKIT / TECH STACK -->
+    <section class="tools-section" id="tools">
+      <div class="section-divider">
+        <span>03 / TOOLKIT</span>
+        <span>SOFTWARE &amp; TECHNOLOGIES</span>
+      </div>
+
+      <div class="tools-header">
+        <h2 class="section-heading">THE <span class="mono-accent">TOOLKIT</span></h2>
+        <p class="tools-intro">Industry-standard editing software, paired with the AI tools that speed up production.</p>
+      </div>
+
+      <div class="tool-grid">
+        <!-- Icons live in /icons and are tinted with CSS masks (see .tool-icon) -->
+        <article class="tool-card">
+          <div class="tool-card-top">
+            <span class="tool-mark"><span class="tool-icon" style="--icon: url('icons/capcut.svg')"></span></span>
+            <span class="tool-tag">EDITING</span>
+          </div>
+          <div>
+            <h4>CapCut</h4>
+            <p>Main editing timeline: cuts, captions, and trend formats.</p>
+          </div>
+        </article>
+
+        <article class="tool-card">
+          <div class="tool-card-top">
+            <span class="tool-mark"><span class="tool-icon" style="--icon: url('icons/nanobanana.svg')"></span></span>
+            <span class="tool-tag">AI IMAGE</span>
+          </div>
+          <div>
+            <h4>Nano Banana Pro</h4>
+            <p>AI image generation and edits for ad visuals.</p>
+          </div>
+        </article>
+
+        <article class="tool-card">
+          <div class="tool-card-top">
+            <span class="tool-mark"><span class="tool-icon" style="--icon: url('icons/descript.svg')"></span></span>
+            <span class="tool-tag">EDITING</span>
+          </div>
+          <div>
+            <h4>Descript</h4>
+            <p>Text-based editing, transcripts, and audio cleanup.</p>
+          </div>
+        </article>
+
+        <article class="tool-card">
+          <div class="tool-card-top">
+            <span class="tool-mark"><span class="tool-icon tool-icon--lg" style="--icon: url('icons/higgsfield.svg')"></span></span>
+            <span class="tool-tag">AI VIDEO</span>
+          </div>
+          <div>
+            <h4>Higgsfield</h4>
+            <p>Cinematic AI video and camera-motion shots.</p>
+          </div>
+        </article>
+
+        <article class="tool-card">
+          <div class="tool-card-top">
+            <span class="tool-mark"><span class="tool-icon" style="--icon: url('icons/heygen.png')"></span></span>
+            <span class="tool-tag">AI</span>
+          </div>
+          <div>
+            <h4>HeyGen</h4>
+            <p>AI avatars and talking-head video.</p>
+          </div>
+        </article>
+
+        <article class="tool-card">
+          <div class="tool-card-top">
+            <span class="tool-mark"><span class="tool-icon" style="--icon: url('icons/canva.svg')"></span></span>
+            <span class="tool-tag">DESIGN</span>
+          </div>
+          <div>
+            <h4>Canva</h4>
+            <p>Thumbnails, ad creatives, and visual covers.</p>
+          </div>
+        </article>
+
+        <article class="tool-card">
+          <div class="tool-card-top">
+            <span class="tool-mark"><span class="tool-icon" style="--icon: url('icons/elevenlabs.svg')"></span></span>
+            <span class="tool-tag">AI VOICE</span>
+          </div>
+          <div>
+            <h4>ElevenLabs</h4>
+            <p>AI voiceover and narration.</p>
+          </div>
+        </article>
+
+        <article class="tool-card tool-card--invert">
+          <div class="tool-card-top">
+            <span class="tool-mark">//</span>
+            <span class="tool-tag">CRAFT</span>
+          </div>
+          <div>
+            <h4>Core Skills</h4>
+            <p>Retention pacing &middot; Hooks &middot; Captions &middot; Color grading &middot; Sound design</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 7. CONTACT -->
+    <section class="contact-section" id="contact">
+      <div class="section-divider">
+        <span>04 / CONTACT</span>
+        <span>LET'S WORK TOGETHER</span>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-left">
+          <div class="status-pill">
+            <span class="dot"></span> AVAILABLE FOR FREELANCE PROJECTS
+          </div>
+          <h2 class="section-heading">HAVE A PROJECT IN MIND? <span class="text-outline">LET'S MAKE THE NEXT CUT COUNT.</span></h2>
+          <p class="contact-intro">
+            Send me your footage, your brief, or just an idea. I'll get back to you with next steps.
           </p>
-          <p class="footer-sub">Have a project in mind? Let's make the next cut count.</p>
-          <a href="mailto:jeremy@example.com" class="btn-pill btn-white">Get in Touch</a>
-        </div>
-      </div>
 
-      <div class="footer-bottom">
-        <span>&copy; 2026 JEREMY ROGER L. MAGUIGAD</span>
-        <span>LINKEDIN / YOUTUBE / GITHUB &mdash; PORTFOLIO</span>
+          <ul class="contact-links">
+            <li>
+              <a href="mailto:maguigadjeremy08@gmail.com">
+                <span class="cl-label">EMAIL</span>
+                <span class="cl-value">maguigadjeremy08@gmail.com</span>
+                <span class="cl-arrow">&#8599;</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/jeremy-roger-l-maguigad/" target="_blank" rel="noopener">
+                <span class="cl-label">LINKEDIN</span>
+                <span class="cl-value">Jeremy Roger L. Maguigad</span>
+                <span class="cl-arrow">&#8599;</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://wa.me/639602812542" target="_blank" rel="noopener">
+                <span class="cl-label">WHATSAPP</span>
+                <span class="cl-value">+63 960 281 2542</span>
+                <span class="cl-arrow">&#8599;</span>
+              </a>
+            </li>
+            <li>
+              <!-- Discord has no public username URL, so this copies the username instead -->
+              <button type="button" class="copy-link" data-copy="mgdjrmy_" aria-label="Copy Discord username mgdjrmy_">
+                <span class="cl-label">DISCORD</span>
+                <span class="cl-value">mgdjrmy_</span>
+                <span class="cl-arrow cl-copy">COPY</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Opens the visitor's email app with the message pre-filled (no server needed on GitHub Pages) -->
+        <form class="contact-form" id="contact-form" data-email="maguigadjeremy08@gmail.com">
+          <div class="form-row">
+            <div class="field">
+              <label for="cf-name">NAME</label>
+              <input type="text" id="cf-name" name="name" placeholder="Your name" required>
+            </div>
+            <div class="field">
+              <label for="cf-email">EMAIL</label>
+              <input type="email" id="cf-email" name="email" placeholder="you@brand.com" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="cf-message">MESSAGE</label>
+            <textarea id="cf-message" name="message" rows="5" placeholder="Tell me about your project, timeline, and budget." required></textarea>
+          </div>
+
+          <button type="submit" class="btn-pill btn-white">Send Message &rarr;</button>
+          <p class="form-note">Opens your email app with the message ready to send.</p>
+        </form>
       </div>
+    </section>
+
+    <footer class="site-footer">
+      <span>&copy; 2026 JEREMY ROGER L. MAGUIGAD</span>
+      <a href="#" class="back-top">BACK TO TOP &uarr;</a>
     </footer>
 
   </main>
 
-  <script src="script.js"></script>
+  <!-- Video player popup (filled by script.js) -->
+  <div class="video-modal" id="video-modal" role="dialog" aria-modal="true" aria-labelledby="vm-title" hidden>
+    <div class="vm-backdrop" data-close></div>
+    <div class="vm-window">
+      <div class="vm-bar">
+        <span class="rec-dot" aria-hidden="true"></span>
+        <span class="vm-title" id="vm-title">PLAYBACK</span>
+        <span class="vm-meta" id="vm-meta"></span>
+        <button class="vm-close" type="button" data-close aria-label="Close video">&#10005;</button>
+      </div>
+      <div class="vm-screen" id="vm-screen"></div>
+    </div>
+  </div>
+
+  <script src="script.js?v=10"></script>
 </body>
 </html>
